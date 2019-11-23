@@ -1,6 +1,6 @@
-import numpy
 import random
-import smtplib
+import smtplib, ssl
+from email.message import EmailMessage
 
 # Ask how many people participate
 # According to this, store N people's names
@@ -29,21 +29,18 @@ print(email_dict)
 
 # Email handle #
 
-sender = 'secretsanta.test1996@gmail.com'
 
-
-sender = "secretsanta.test1996@gmail.com"
-server = smtplib.SMTP('smtp.gmail.com', 587)
-server.starttls()
-
-#Next, log in to the server
-server.login("secretsanta.test1996@gmail.com", "flifel85")
-
-#Send the mail
+# Send the mail
 for elem in list_ppl:
-    msg = """
-    Hey """ + elem + """, your secret santa is : """ 
-    + secret_dict[elem] 
-    server.sendmail(sender, email_dict[elem], msg)
+    msg = EmailMessage()
+    msg.set_content("Hello " + elem + ", your secret santa is : " + secret_dict[elem])
+    msg["Subject"] = "Secret Santa"
+    msg["From"] = input("Enter the email you want to send the message from : ")
+    msg["To"] = email_dict[elem]
+    password_mail = input("Enter the password of the email you want to send the message from : ")
+    context=ssl.create_default_context()
 
-server.quit()
+    with smtplib.SMTP("smtp.gmail.com", port=587) as smtp:
+        smtp.starttls(context=context)
+        smtp.login(msg["From"], password_mail)
+        smtp.send_message(msg)
