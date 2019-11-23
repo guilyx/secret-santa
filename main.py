@@ -24,23 +24,23 @@ for elem in list_ppl:
     secret_dict[elem] = secret_santa
     list_match.remove(secret_santa)
 
-print(secret_dict)
-print(email_dict)
+# print(secret_dict)
+# print(email_dict)
 
 # Email handle #
-
+mail_from = input("Enter the email you want to send the message from : ")
+mail_password = input("Enter the password of the email you want to send the message from : ")
 
 # Send the mail
 for elem in list_ppl:
     msg = EmailMessage()
     msg.set_content("Hello " + elem + ", your secret santa is : " + secret_dict[elem])
     msg["Subject"] = "Secret Santa"
-    msg["From"] = input("Enter the email you want to send the message from : ")
+    msg["From"] = mail_from
     msg["To"] = email_dict[elem]
-    password_mail = input("Enter the password of the email you want to send the message from : ")
     context=ssl.create_default_context()
 
     with smtplib.SMTP("smtp.gmail.com", port=587) as smtp:
         smtp.starttls(context=context)
-        smtp.login(msg["From"], password_mail)
+        smtp.login(msg["From"], mail_password)
         smtp.send_message(msg)
