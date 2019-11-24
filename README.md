@@ -1,8 +1,10 @@
 # Secret Santa
 
-For better use, write a shell script as followed :
+For better use, write a shell script in the scripts/ folder as followed :
 
 ```
+cd ..
+cd src/
 python3 main.py << EOF
 4 # number of participants
 John # names of the participants (more or less than 4 inputs not supported yet)
