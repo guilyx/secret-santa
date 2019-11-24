@@ -18,8 +18,9 @@ for elem in list_ppl:
     email_dict[elem] = input("Enter " + elem + "'s EMAIL --> ")
 
 secret_dict = dict()
-list_match = list_ppl.copy()
 for elem in list_ppl:
+    list_match = list_ppl.copy()
+    list_match.remove(elem)
     secret_santa = random.choice(list_match)
     secret_dict[elem] = secret_santa
     list_match.remove(secret_santa)
