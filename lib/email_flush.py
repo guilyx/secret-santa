@@ -1,5 +1,7 @@
+import sys, os
+sys.path.insert(0, os.path.abspath('..'))
+
 import imaplib
-import sys
 
 '''
 Simple script that deletes your sent emails

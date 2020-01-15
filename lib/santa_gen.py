@@ -1,9 +1,10 @@
 # Anonymous version of the email generation
+import sys, os
+sys.path.insert(0, os.path.abspath('..'))
 
 import random
 import smtplib, ssl
 from email.message import EmailMessage
-import sys
 
 '''
 Simple script that generates a Secret Santa pool
