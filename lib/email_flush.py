@@ -4,8 +4,9 @@ import sys
 '''
 Simple script that deletes your sent emails
 
--email: Gmail email
--pw: gmail pw
+- Could add other methods for other boxes
+- Could delete last x mails
+- Could delete emails since t time
 '''
 
 class Flush(object):

@@ -10,12 +10,6 @@ Simple script that generates a Secret Santa pool
 - Enter number of people participating
 - Enter everyone's name
 - Enter everyone's email address
-
-args :
--email: Gmail email
--pw: gmail pw
-
-example : python santa_gen.py email=toto@popo.com pw=password
 '''
 
 # Ask how many people participate
