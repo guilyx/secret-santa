@@ -1,3 +1,5 @@
+# Anonymous version of the email generation
+
 import random
 import smtplib, ssl
 from email.message import EmailMessage
