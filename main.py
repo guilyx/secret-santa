@@ -15,17 +15,20 @@ example : python main.py email=toto@popo.com pw=password
 
 
 if __name__ == '__main__':
+    ##### Getting args ######
     args = dict([arg.split('=') for arg in sys.argv[1:]])
 
-
+    ##### Generating Mails #####
     ss = Santa(args['mail'], args['pw'])
-    flush_sent = Flush(args['mail'], args['pw'])
 
     ss.set_number()
     ss.set_names()
     ss.set_emails()
     ss.gen_secrets()
     ss.send_emails()
+
+    ##### Flushing #####
+    flush_sent = Flush(args['mail'], args['pw'])
 
     flush_sent.connectImap()
     flush_sent.deleteSentMails()
