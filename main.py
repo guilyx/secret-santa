@@ -10,7 +10,7 @@ args :
 -email: Gmail email
 -pw: gmail pw
 
-example : python santa_gen.py email=toto@popo.com pw=password
+example : python main.py email=toto@popo.com pw=password
 '''
 
 
