@@ -1,5 +1,4 @@
 import imaplib
-import sys
 
 '''
 Simple script that deletes your sent emails
@@ -18,10 +17,10 @@ class Flush(object):
 
     def connectImap(self):
         connect = self.box.login(self.usr, self.pw)
-        print(*connect)
+        print(connect)
 
     def checkListLabels(self):
-        print(*self.box.list())
+        print(self.box.list())
 
     def deleteSentMails(self):
         print("Deleting all sent emails...")

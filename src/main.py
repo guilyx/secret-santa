@@ -1,6 +1,10 @@
+import sys
+from os import path
+sys.path.append( path.dirname( path.dirname( path.abspath(__file__) ) ) )
+
 from lib.email_flush import Flush
 from lib.santa_gen import Santa
-import sys
+
 '''
 main script to generate secret santa pool, send emails to participant, flush the sent emails
 

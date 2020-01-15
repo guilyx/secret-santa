@@ -1,9 +1,6 @@
-# Anonymous version of the email generation
-
 import random
 import smtplib, ssl
-from email.message import EmailMessage
-import sys
+from email.message import *
 
 '''
 Simple script that generates a Secret Santa pool
@@ -29,12 +26,19 @@ class Santa(object):
         self.email_dict = dict()
         self.secret_dict = dict()
     
-    def set_number(self):
-        self.nb_ppl = int(input("\nHow many people are participating to the Secret Santa ? --> "))
-    
-    def set_names(self):
-        for i in range(self.nb_ppl):
-            self.list_ppl.append(input("\nEnter person number " + str(i+1) + "'s name --> "))
+    def set_number(self, setN = None):
+        if (setN == None):
+            self.nb_ppl = int(input("\nHow many people are participating to the Secret Santa ? --> "))
+        else:
+            self.nb_ppl = setN
+
+    def set_names(self, list_names = None):
+        if (list_names == None):
+            for i in range(self.nb_ppl):
+                self.list_ppl.append(input("\nEnter person number " + str(i+1) + "'s name --> "))
+        else:
+            for i in range(self.nb_ppl):
+                self.list_ppl = list_names
 
     def set_emails(self):
         for elem in self.list_ppl:
