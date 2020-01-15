@@ -1,10 +1,14 @@
 from lib.email_flush import Flush
 from lib.santa_gen import Santa
+import sys
 
 
 if __name__ == '__main__':
-    ss = Santa()
-    flush_sent = Flush()
+    args = dict([arg.split('=') for arg in sys.argv[1:]])
+
+
+    ss = Santa(args['mail'], args['pw'])
+    flush_sent = Flush(args['mail'], args['pw'])
 
     ss.set_number()
     ss.set_names()
