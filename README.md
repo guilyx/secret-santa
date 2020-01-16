@@ -1,4 +1,4 @@
-# Secret Santa
+# Secret Santa Generator
 
 For better use, write a shell script in the scripts/ folder as followed :
 
