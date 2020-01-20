@@ -1,4 +1,4 @@
-# Secret Santa
+# Secret Santa Generator
 
 For better use, write a shell script in the scripts/ folder as followed :
 
@@ -16,6 +16,6 @@ email4@example.com
 EOF
 ```
 
-Launch the shell script from root :
+Launch the shell script from the project's root :
 
 ```sh scripts/scriptname.sh```
