@@ -9,7 +9,7 @@ from lib.santa_gen import Santa
 class EmailTest:
     def __init__(self):
         self.ss = Santa("totoletontontesteur@gmail.com", "testonetwoonetwo")
-        self.flush = Flush("totoletontontesteur@gmail.com", "testonetwoonetwo")
+        self.flush = Flush("totoletontontesteur@gmail.com", "testonetwoonetwo", ss.n_deleted)
 
 def test_nb_people():
     test = EmailTest()
