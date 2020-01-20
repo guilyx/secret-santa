@@ -1,4 +1,5 @@
 import imaplib
+from lib.santa_gen import Santa
 
 '''
 Simple script that deletes your sent emails
@@ -9,11 +10,12 @@ Simple script that deletes your sent emails
 '''
 
 class Flush(object):
-    def __init__(self, usr, pw):
+    def __init__(self, usr, pw, n_deleted):
         print("\nConnecting to the GMAIL server...")
         self.box = imaplib.IMAP4_SSL("imap.gmail.com") # connecting to gmail boxer
         self.usr = usr
         self.pw = pw
+        self.n_deleted = n_deleted
 
     def connectImap(self):
         connect = self.box.login(self.usr, self.pw)
@@ -21,15 +23,29 @@ class Flush(object):
 
     def checkListLabels(self):
         print(self.box.list())
+    
+    def selectLastN(self):
+        temp_string = [str(i) for i in range(self.n_deleted)]
+        new_string = ''
+
+        for elem in temp_string:
+            new_string += elem + ' '
+
+        new_string = new_string[:-1]
+        res = [new_string]
+
+        return res
 
     def deleteSentMails(self):
         print("Deleting all sent emails...")
         self.box.select('"[Gmail]/Sent Mail"')
-        typ, data = self.box.search(None, 'ALL')
+        filter = self.selectLastN()
+        typ, data = self.box.search(None, filter)
+
         for num in data[0].split():
             self.box.store(num, '+FLAGS', '\\Deleted')
+
         self.box.expunge()
-        
     
     # Needed if your Gmail parameters stores deleted emails in the trash
     def cleanTrash(self):
@@ -42,9 +58,3 @@ class Flush(object):
         print("Closing imap and logging out...")
         self.box.close()
         self.box.logout()
-
-if __name__ == '__main__':
-    flush_sent = Flush("toto@tati.tata", "prout")
-    flush_sent.connectImap()
-    flush_sent.deleteSentMails()
-    flush_sent.logout()

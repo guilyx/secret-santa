@@ -27,5 +27,16 @@ def test_people():
             list_names.append("tata")
     test.ss.set_names(list_names)
     assert len(test.ss.list_ppl) > 0
+
+def test_people_bis():
+    test = EmailTest()
+    test.ss.set_number(randint(0, 50))
+    list_names = []
+    for i in range (test.ss.nb_ppl):
+        if (i%2 == 0):
+            list_names.append("toto")
+        else:
+            list_names.append("tata")
+    test.ss.set_names(list_names)
     assert len(test.ss.list_ppl) == test.ss.nb_ppl
 
