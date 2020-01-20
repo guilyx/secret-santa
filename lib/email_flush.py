@@ -17,33 +17,28 @@ class Flush(object):
         self.pw = pw
         self.n_deleted = n_deleted
 
+
     def connectImap(self):
         connect = self.box.login(self.usr, self.pw)
         print(connect)
 
+
     def checkListLabels(self):
         print(self.box.list())
-    
-    def selectLastN(self):
-        temp_string = [str(i) for i in range(self.n_deleted)]
-        new_string = ''
 
-        for elem in temp_string:
-            new_string += elem + ' '
-
-        new_string = new_string[:-1]
-        res = [new_string]
-
-        return res
 
     def deleteSentMails(self):
         print("Deleting all sent emails...")
         self.box.select('"[Gmail]/Sent Mail"')
-        filter = self.selectLastN()
-        typ, data = self.box.search(None, filter)
+        typ, data = self.box.search(None, 'ALL')
 
+        i = 0
         for num in data[0].split():
-            self.box.store(num, '+FLAGS', '\\Deleted')
+            if (i > self.n_deleted -1):
+                break
+            else:
+                self.box.store(num, '+FLAGS', '\\Deleted')
+            i += 1
 
         self.box.expunge()
     
@@ -53,6 +48,7 @@ class Flush(object):
         self.box.select('[Gmail]/Trash')  # select all trash
         self.box.store("1:*", '+FLAGS', '\\Deleted')  #Flag all Trash as Deleted
         self.box.expunge()
+
 
     def logout(self):
         print("Closing imap and logging out...")

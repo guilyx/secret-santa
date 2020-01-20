@@ -25,12 +25,14 @@ class Santa(object):
         self.list_ppl = []
         self.email_dict = dict()
         self.secret_dict = dict()
+        
     
     def set_number(self, setN = None):
         if (setN == None):
             self.nb_ppl = int(input("\nHow many people are participating to the Secret Santa ? --> "))
         else:
             self.nb_ppl = setN
+
 
     def set_names(self, list_names = None):
         if (list_names == None):
@@ -40,9 +42,11 @@ class Santa(object):
             for i in range(self.nb_ppl):
                 self.list_ppl = list_names
 
+
     def set_emails(self):
         for elem in self.list_ppl:
             self.email_dict[elem] = input("\nEnter " + elem + "'s EMAIL --> ")
+
 
     def gen_secrets(self):
         for elem in self.list_ppl:
@@ -52,6 +56,7 @@ class Santa(object):
             self.secret_dict[elem] = secret_santa
             list_match.remove(secret_santa)
     
+
     def send_emails(self):
         mail_from = self.usr
         mail_password = self.pw
@@ -69,6 +74,7 @@ class Santa(object):
                 smtp.starttls(context=context)
                 smtp.login(msg["From"], mail_password)
                 smtp.send_message(msg)
+
 
 if __name__ == '__main__':
     ss = Santa("toto@tati.tata", "prout")
