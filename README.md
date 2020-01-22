@@ -1,5 +1,7 @@
 # Secret Santa Generator
 
+## Run
+
 For better use, write a shell script in the scripts/ folder as followed :
 
 ```
