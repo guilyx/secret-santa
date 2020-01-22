@@ -1,8 +1,16 @@
 # Secret Santa Generator
 
+## Setup
+
+To setup the project on your local machine:
+
+1. Click on `Fork`.
+2. Go to your fork and `clone` the project to your local machine.
+3. `git clone https://github.com/Guilyx/secret-santa.git`
+
 ## Run
 
-For better use, write a shell script in the scripts/ folder as followed :
+To run the project for your personal use, write a shell script in the scripts/ folder as followed :
 
 ```
 python3 main.py mail=sender-email@example.com pw=sender-password<< EOF
@@ -23,12 +31,6 @@ Launch the shell script from the project's root :
 ```sh scripts/scriptname.sh```
 
 ## Contribute
-
-To setup the project on your local machine:
-
-1. Click on `Fork`.
-2. Go to your fork and `clone` the project to your local machine.
-3. `git clone https://github.com/Guilyx/secret-santa.git`
 
 To contribute to the project:
 
