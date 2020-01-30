@@ -30,6 +30,12 @@ Launch the shell script from the project's root :
 
 ```sh scripts/scriptname.sh```
 
+Another way to do it is to use the command line interface by simply running :
+
+```python3 main.py mail=sender-email@example.com pw=sender-password```
+
+Then let the interface guide you. ( It's still more conveniant with the first option. ) Feel free to contribute by starting a GUI, the idea is in the books but time lacks.
+
 ## Contribute
 
 To contribute to the project:
