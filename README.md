@@ -51,9 +51,15 @@ Follow the given link to make a successful and valid PR: https://help.github.com
 To send a PR, follow these rules carefully, **otherwise your PR will be closed**:
 
 1. Make PR title in this formats: 
-`Fixes #IssueNo : Name of Issue` 
-`Feature #IssueNo : Name of Issue`
-`Enhancement #IssueNo : Name of Issue`
+```
+Fixes #IssueNo : Name of Issue
+``` 
+```
+Feature #IssueNo : Name of Issue
+```
+```
+Enhancement #IssueNo : Name of Issue
+```
 
 According to what type of issue you believe it is.
 
