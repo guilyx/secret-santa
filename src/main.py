@@ -14,7 +14,6 @@ import sys
 from os import path
 sys.path.append( path.dirname( path.dirname( path.abspath(__file__) ) ) )
 
-from lib.email_flush import Flush
 from lib.santa_gen import Santa
 
 
@@ -31,11 +30,5 @@ if __name__ == '__main__':
     ss.set_emails()
     ss.gen_secrets()
     ss.send_emails()
-
-    ##### Flushing #####
-    flush_sent = Flush(args['mail'], args['pw'], ss.nb_ppl)
-
-    flush_sent.connectImap()
-    flush_sent.deleteSentMails()
-    flush_sent.cleanTrash()
-    flush_sent.logout()
+    ss.flush_emails()
+    
