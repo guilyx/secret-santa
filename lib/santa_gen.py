@@ -1,20 +1,58 @@
+'''
+author : Erwin Lejeune <erwin.lejeune15@gmail.com>
+date : 23 Nov 2019
+repo : https://github.com/Guilyx/secret-santa
+'''
 import random
 import smtplib, ssl
 from email.message import *
+import imaplib
 
-'''
-Simple script that generates a Secret Santa pool
-- Enter number of people participating
-- Enter everyone's name
-- Enter everyone's email address
-'''
+class Flush(object):
+    def __init__(self, usr, pw, n_deleted):
+        print("\nConnecting to the GMAIL server...")
+        self.box = imaplib.IMAP4_SSL("imap.gmail.com") # connecting to gmail boxer
+        self.usr = usr
+        self.pw = pw
+        self.n_deleted = n_deleted
 
-# Ask how many people participate
-# According to this, store N people's names
-# Assign to each person another person randomly
 
-# Secret Santa definition #
+    def connectImap(self):
+        connect = self.box.login(self.usr, self.pw)
+        print(connect)
 
+
+    def checkListLabels(self):
+        print(self.box.list())
+
+
+    def deleteSentMails(self):
+        print("Deleting all sent emails...")
+        self.box.select('"[Gmail]/Sent Mail"')
+        typ, data = self.box.search(None, 'ALL')
+
+        i = 0
+        for num in data[0].split():
+            if (i > self.n_deleted -1):
+                break
+            else:
+                self.box.store(num, '+FLAGS', '\\Deleted')
+            i += 1
+
+        self.box.expunge()
+    
+    # Needed if your Gmail parameters stores deleted emails in the trash
+    def cleanTrash(self):
+        print("Emptying Trash & Expunge...")
+        self.box.select('[Gmail]/Trash')  # select all trash
+        self.box.store("1:*", '+FLAGS', '\\Deleted')  #Flag all Trash as Deleted
+        self.box.expunge()
+
+
+    def logout(self):
+        print("Closing imap and logging out...")
+        self.box.close()
+        self.box.logout()
 
 
 class Santa(object):
@@ -75,6 +113,14 @@ class Santa(object):
                 smtp.login(msg["From"], mail_password)
                 smtp.send_message(msg)
 
+    def flush_emails(self):
+        ##### Flushing #####
+        flush_sent = Flush(self.usr, self.pw, self.nb_ppl)
+        flush_sent.connectImap()
+        flush_sent.deleteSentMails()
+        flush_sent.cleanTrash()
+        flush_sent.logout()
+
 
 if __name__ == '__main__':
     ss = Santa("toto@tati.tata", "prout")
@@ -83,3 +129,4 @@ if __name__ == '__main__':
     ss.set_emails()
     ss.gen_secrets()
     ss.send_emails()
+    ss.flush_emails()
