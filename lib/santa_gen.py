@@ -4,27 +4,27 @@ date : 23 Nov 2019
 repo : https://github.com/Guilyx/secret-santa
 '''
 import random
-import smtplib, ssl
+import smtplib
+import ssl
 from email.message import *
 import imaplib
+
 
 class Flush(object):
     def __init__(self, usr, pw, n_deleted):
         print("\nConnecting to the GMAIL server...")
-        self.box = imaplib.IMAP4_SSL("imap.gmail.com") # connecting to gmail boxer
+        # connecting to gmail boxer
+        self.box = imaplib.IMAP4_SSL("imap.gmail.com")
         self.usr = usr
         self.pw = pw
         self.n_deleted = n_deleted
-
 
     def connectImap(self):
         connect = self.box.login(self.usr, self.pw)
         print(connect)
 
-
     def checkListLabels(self):
         print(self.box.list())
-
 
     def deleteSentMails(self):
         print("Deleting all sent emails...")
@@ -33,21 +33,21 @@ class Flush(object):
 
         i = 0
         for num in data[0].split():
-            if (i > self.n_deleted + 1):
+            if (i > self.n_deleted):
                 break
             else:
                 self.box.store(num, '+FLAGS', '\\Deleted')
             i += 1
 
         self.box.expunge()
-    
+
     # Needed if your Gmail parameters stores deleted emails in the trash
     def cleanTrash(self):
         print("Emptying Trash & Expunge...")
         self.box.select('[Gmail]/Trash')  # select all trash
-        self.box.store("1:*", '+FLAGS', '\\Deleted')  #Flag all Trash as Deleted
+        # Flag all Trash as Deleted
+        self.box.store("1:*", '+FLAGS', '\\Deleted')
         self.box.expunge()
-
 
     def logout(self):
         print("Closing imap and logging out...")
@@ -57,33 +57,33 @@ class Flush(object):
 
 class Santa(object):
     def __init__(self, usr, pw):
-        self.usr = usr 
+        self.usr = usr
         self.pw = pw
         self.nb_ppl = 0
         self.list_ppl = []
         self.email_dict = dict()
         self.secret_dict = dict()
-        
-    
-    def set_number(self, setN = None):
+
+    def set_number(self, setN=None):
         if (setN == None):
-            self.nb_ppl = int(input("\nHow many people are participating to the Secret Santa ? --> "))
+            self.nb_ppl = int(
+                input("\nHow many people are participating to the Secret Santa ? --> "))
         else:
             self.nb_ppl = setN
 
-
-    def set_names(self, list_names = None):
+    def set_names(self, list_names=None):
         if (list_names == None):
             for i in range(self.nb_ppl):
-                self.list_ppl.append(input("\nEnter person number " + str(i+1) + "'s name --> "))
+                self.list_ppl.append(
+                    input("\nEnter person number " + str(i+1) + "'s name --> "))
         else:
             self.list_ppl = list_names[0:self.nb_ppl]
 
-
-    def set_emails(self, email_dict = None):
+    def set_emails(self, email_dict=None):
         if (email_dict == None):
             for elem in self.list_ppl:
-                self.email_dict[elem] = input("\nEnter " + elem + "'s EMAIL --> ")
+                self.email_dict[elem] = input(
+                    "\nEnter " + elem + "'s EMAIL --> ")
         else:
             self.email_dict = email_dict
 
@@ -94,7 +94,6 @@ class Santa(object):
             secret_santa = random.choice(list_match)
             self.secret_dict[elem] = secret_santa
             list_match.remove(secret_santa)
-    
 
     def send_emails(self):
         mail_from = self.usr
@@ -103,11 +102,12 @@ class Santa(object):
         # Send the mail
         for elem in self.list_ppl:
             msg = EmailMessage()
-            msg.set_content("Hello " + elem + ", your secret santa is : " + self.secret_dict[elem])
+            msg.set_content(
+                "Hello " + elem + ", your secret santa is : " + self.secret_dict[elem])
             msg["Subject"] = "Secret Santa"
             msg["From"] = mail_from
             msg["To"] = self.email_dict[elem]
-            context=ssl.create_default_context()
+            context = ssl.create_default_context()
 
             with smtplib.SMTP("smtp.gmail.com", port=587) as smtp:
                 smtp.starttls(context=context)
