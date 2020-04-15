@@ -229,7 +229,7 @@ class MyWidget(QtWidgets.QWidget):
 
     def __setWindow(self):
         self.setWindowTitle('Secret Santapp')
-        self.setWindowIcon(QtGui.QIcon('icon.png'))
+        self.setWindowIcon(QtGui.QIcon('../res/icon.png'))
         self.resize(800, 600)
         self.__centerWindow()
 
