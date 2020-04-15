@@ -2,7 +2,7 @@ import sys
 import random
 import time
 from PySide2 import QtCore, QtWidgets, QtGui
-from santa_gen import Santa
+from lib.santa_gen import Santa
 
 
 class MyWidget(QtWidgets.QWidget):
@@ -330,9 +330,8 @@ class MyWidget(QtWidgets.QWidget):
             pass
 
 
-if __name__ == "__main__":
-    app = QtWidgets.QApplication([])
-    widget = MyWidget()
-    widget.show()
 
-    sys.exit(app.exec_())
+app = QtWidgets.QApplication([])
+widget = MyWidget()
+widget.show()
+sys.exit(app.exec_())
