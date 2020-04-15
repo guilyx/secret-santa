@@ -33,7 +33,7 @@ class Flush(object):
 
         i = 0
         for num in data[0].split():
-            if (i > self.n_deleted -1):
+            if (i > self.n_deleted + 1):
                 break
             else:
                 self.box.store(num, '+FLAGS', '\\Deleted')
@@ -77,14 +77,15 @@ class Santa(object):
             for i in range(self.nb_ppl):
                 self.list_ppl.append(input("\nEnter person number " + str(i+1) + "'s name --> "))
         else:
-            for i in range(self.nb_ppl):
-                self.list_ppl = list_names
+            self.list_ppl = list_names[0:self.nb_ppl]
 
 
-    def set_emails(self):
-        for elem in self.list_ppl:
-            self.email_dict[elem] = input("\nEnter " + elem + "'s EMAIL --> ")
-
+    def set_emails(self, email_dict = None):
+        if (email_dict == None):
+            for elem in self.list_ppl:
+                self.email_dict[elem] = input("\nEnter " + elem + "'s EMAIL --> ")
+        else:
+            self.email_dict = email_dict
 
     def gen_secrets(self):
         for elem in self.list_ppl:
