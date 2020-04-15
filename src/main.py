@@ -12,23 +12,15 @@ example : python main.py email=toto@popo.com pw=password
 
 import sys
 from os import path
+from PySide2 import QtWidgets
 sys.path.append( path.dirname( path.dirname( path.abspath(__file__) ) ) )
 
-from lib.santa_gen import Santa
-
-
+from lib.qtgui import MyWidget
 
 if __name__ == '__main__':
-    ##### Getting args ######
-    args = dict([arg.split('=') for arg in sys.argv[1:]])
+    app = QtWidgets.QApplication([])
+    widget = MyWidget()
+    widget.show()
 
-    ##### Generating Mails #####
-    ss = Santa(args['mail'], args['pw'])
-
-    ss.set_number()
-    ss.set_names()
-    ss.set_emails()
-    ss.gen_secrets()
-    ss.send_emails()
-    ss.flush_emails()
+    sys.exit(app.exec_())
     
