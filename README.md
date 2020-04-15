@@ -22,31 +22,7 @@ To setup the project on your local machine:
 
 ## Run
 
-To run the project for your personal use, write a shell script in the scripts/ folder as followed :
-
-```
-python3 main.py mail=sender-email@example.com pw=sender-password<< EOF
-4 # number of participants
-John # names of the participants (more or less than 4 inputs not supported yet)
-Doe
-Foo
-Bar
-email1@example.com
-email2@example.com
-email3@example.com
-email4@example.com
-EOF
-```
-
-Launch the shell script from the project's root :
-
-```sh scripts/scriptname.sh```
-
-Another way to do it is to use the command line interface by simply running :
-
-```python3 main.py mail=sender-email@example.com pw=sender-password```
-
-Then let the interface guide you. ( It's still more conveniant with the first option. ) Feel free to contribute by starting a GUI, the idea is in the books but time lacks.
+Simply run `python3 src/main.py` in the repo's root
 
 ## Contribute
 
