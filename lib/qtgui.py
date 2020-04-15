@@ -92,11 +92,11 @@ class MyWidget(QtWidgets.QWidget):
         self.applicationLayout.addWidget(self.groupBoxes['Pool Size'])
 
     def __run(self):
-        if (self.entries['Gmail IDs'].text() is '') or (self.entries['Password'].text() is ''):
+        if (self.entries['Gmail IDs'].text() == '') or (self.entries['Password'].text() == ''):
             QtWidgets.QMessageBox.critical(
                 self.buttons['Next'], 'Error', 'You need to enter your gmail ids !')
 
-        elif (self.entries['Gmail IDs'].text() is self.entryInit[0]) or (self.entries['Password'].text() is self.entryInit[1]):
+        elif (self.entries['Gmail IDs'].text() == self.entryInit[0]) or (self.entries['Password'].text() == self.entryInit[1]):
             QtWidgets.QMessageBox.critical(
                 self.buttons['Next'], 'Error', 'You need to enter your gmail ids !')
 
