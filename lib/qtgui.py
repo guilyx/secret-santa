@@ -23,6 +23,9 @@ class MyWidget(QtWidgets.QWidget):
         self.list = dict()
         self.layouts = []
 
+        self.firstMenuParsed = False
+        self.secondMenuParsed = False
+
         self.defaultFont = QtGui.QFont('Helvetica', 11, QtGui.QFont.Normal)
 
         self.__createGroupBox('Secret Santa App', self,
@@ -42,7 +45,6 @@ class MyWidget(QtWidgets.QWidget):
 
     def __firstMenu(self):
         self.mainLayout = QtWidgets.QVBoxLayout(self)
-        self.layouts.append(self.mainLayout)
         self.mainLayout.setContentsMargins(20, 20, 20, 20)
 
         self.__createProgressBar('Progress', 3)
@@ -54,6 +56,7 @@ class MyWidget(QtWidgets.QWidget):
         self.labels[self.introText].setWordWrap(True)
 
         self.groupBoxes['Secret Santa App'].setLayout(self.mainLayout)
+
         self.mainLayout.addWidget(self.labels[self.introText])
         self.mainLayout.addLayout(self.applicationLayout)
         self.mainLayout.addWidget(self.groupBoxes['Options'])
@@ -63,9 +66,23 @@ class MyWidget(QtWidgets.QWidget):
         self.buttons['Exit'].clicked.connect(self.__exitUI)
         self.buttons['About'].clicked.connect(self.__aboutBox)
 
+        self.firstMenuParsed = True
+    
+    def __backToFirstMenu(self):
+        self.__clearLayout(self.mainLayout)
+        
+        self.__clearLayout(self.applicationLayout)
+        self.__clearLayout(self.buttonsLayout)
+        self.__clearLayout(self.nameEntriesLayout)
+        self.__clearLayout(self.nparticipantsLayout)
+        self.__clearLayout(self.progressLayout)
+    
+        self.__firstMenu()
+
     def __setSanta(self):
         self.applicationLayout = QtWidgets.QHBoxLayout()
         self.layouts.append(self.applicationLayout)
+
         self.__createGroupBox('Gmail IDs', self.groupBoxes['Secret Santa App'])
         self.__createGroupBox('Pool Size', self.groupBoxes['Secret Santa App'])
 
@@ -91,6 +108,8 @@ class MyWidget(QtWidgets.QWidget):
         self.applicationLayout.addWidget(self.groupBoxes['Gmail IDs'])
         self.applicationLayout.addWidget(self.groupBoxes['Pool Size'])
 
+        self.secondMenuParsed = True
+
     def __run(self):
         if (self.entries['Gmail IDs'].text() == '') or (self.entries['Password'].text() == ''):
             QtWidgets.QMessageBox.critical(
@@ -101,6 +120,8 @@ class MyWidget(QtWidgets.QWidget):
                 self.buttons['Next'], 'Error', 'You need to enter your gmail ids !')
 
         else:
+            self.buttons['Back'].setEnabled(True)
+            self.buttons['Back'].clicked.connect(self.__backToFirstMenu)
             self.gmailId = self.entries['Gmail IDs'].text()
             self.gmailPwd = self.entries['Password'].text()
 
@@ -308,10 +329,14 @@ class MyWidget(QtWidgets.QWidget):
         self.buttonsLayout = QtWidgets.QHBoxLayout()
 
         self.__createButton('Next')
+        self.__createButton('Back')
         self.__createButton('Exit')
         self.__createButton('About')
 
+        self.buttons['Next'].autoDefault()
+        self.buttons['Back'].setEnabled(False)
         self.buttonsLayout.addWidget(self.buttons['Next'])
+        self.buttonsLayout.addWidget(self.buttons['Back'])
         self.buttonsLayout.addWidget(self.buttons['About'])
         self.buttonsLayout.addWidget(self.buttons['Exit'])
 
