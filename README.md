@@ -1,10 +1,11 @@
-![github-ci](https://github.com/master-coro/artin-pathfinding/workflows/github-ci/badge.svg)
+[![Say Thanks][saythanks-shield]][saythanks-url]
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
+![github-ci](https://github.com/master-coro/artin-pathfinding/workflows/github-ci/badge.svg)
 
 <br />
 <p align="center">
@@ -67,6 +68,8 @@ Everyone part of the original team or that assisted throughout the development.
 
 - [Erwin Lejeune](https://github.com/Guilyx)
 
+[saythanks-shield]:https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg?style=flat-square
+[saythanks-url]:https://saythanks.io/to/erwin.lejeune15%40gmail.com
 [contributors-shield]: https://img.shields.io/github/contributors/guilyx/secret-santa.svg?style=flat-square
 [contributors-url]: https://github.com/guilyx/secret-santa/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/guilyx/secret-santa.svg?style=flat-square
